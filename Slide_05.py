@@ -48,13 +48,26 @@ while x < 5:
 for i in range(5):
   print(i)
 
+frutas = ["maçã", "banana", "uva"]
+for fruta in frutas:
+ print("Eu gosto de", fruta)
 
 
+#For com range(início, limite, passo)
+S = 0
+for x in range(1, 20, 3):
+ S = S + x
+print("Soma =", S)
 
+notas = [3.4, 6.6, 8, 9, 10, 9.5, 8.8, 4.3]
+soma = 0
+for nota in notas:
+ soma += nota
+media = soma / len(notas)
+print("Média =", media)
 
-
-
-
-
-
+S = 0  
+for x in range(3, 334, 3):
+ S += x
+print("Soma =", S)
 
