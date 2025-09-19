@@ -158,12 +158,140 @@ df1.replace({'F': 'Feminino', 'M': 'Masculino'}) # substitui valores no DataFram
 df1.apply(lambda x: x + 1 if x.name == 'Idade' else x) # aplica uma função em cada coluna
 df1.groupby('Sexo').mean() # agrupa por 'Sexo' e calcula a média
 
+#outros métodos
+head(n)# retorna as primeiras n linhas do DataFrame.
+tail(n)# retorna as últimas n linhas do DataFrame.
+info()# exibe um resumo conciso do DataFrame, incluindo o número de entradas, colunas, tipos de dados e uso de memória.
+value_counts()# conta a frequência de valores únicos em uma coluna.
+isnull()# retorna um DataFrame booleano indicando a presença de valores nulos.
+dropna()# remove linhas ou colunas com valores nulos.
+fillna(value)# preenche valores nulos com um valor especificado.
+apply(func)# aplica uma função ao longo de um eixo do DataFrame (linhas ou colunas).
+groupby(by)# agrupa o DataFrame por uma ou mais colunas e permite a aplicação de funções agregadas.
 
+import pandas as pd
+dados = {
+'Nome': ['Ana', 'Bruno', 'Carla', 'Daniel', 'Eva'],
+'Matemática': [85, 92, 78, 90, 88],
+'Física': [80, 95, 82, 88, 91],
+'Química': [78, 89, 85, 87, 90]
+}
+df = pd.DataFrame(dados)
+print(df)
+# calcular a média das notas em cada disciplina usando o método mean() e desvio padrão usando o método std().
+medias = list(df[['Matemática','Física','Química']].mean())
+desviosp = list(df[['Matemática','Física','Química']].std())
+print(medias)
+print(desviosp)
+#Criar um novo DataFrame com as médias e desvios padrão
+mean_std = pd.DataFrame([medias, desviosp], columns=['Matemática','Física','Química'], index=['Média', 'Desvio Padrão'])
+print(mean_std)
 
+#operações com matrizes
+add()# soma dois DataFrames ou um DataFrame e um escalar.
+sub()# subtrai dois DataFrames ou um DataFrame e um escalar.
+mul()# multiplica dois DataFrames ou um DataFrame e um escalar.
+div()# divide dois DataFrames ou um DataFrame e um escalar.
+pow()# eleva os elementos de um DataFrame a uma potência especificada.
+eq()# verifica a igualdade entre dois DataFrames ou entre um DataFrame e um escalar.
+ne()# verifica a desigualdade entre dois DataFrames ou entre um DataFrame e um escalar.
+dot()# realiza o produto escalar entre dois DataFrames.
 
+import pandas as pd
+df1 = pd.DataFrame([ [19, 23, 34],
+[15, 55, 60],
+[7, 32, 15] ])
+print(df1)
 
+df2 = pd.DataFrame([ [2, 3, 4],
+[5, 6, 7],
+[8, 9, 10] ])
+print(df2)
 
+df3 = df1.add(df2) # Soma df1 e df2
+print(df3)
 
+df4 = df1.mul(2) # Multiplica df1 por 2
+print(df4)
+
+#Transformação em Matriz NumPy
+#Para transformar um DataFrame em uma matriz NumPy, podemos usar o atributo to_numpy.
+#Esse atributo retorna os dados do DataFrame como uma matriz NumPy.
+dados = [('Ana', 21), ('Bruno', 20), ('Carla', 22)]
+df = pd.DataFrame(data = dados, columns=['Nome', 'Idade'])
+print(df)
+
+matriz = df.to_numpy()
+print(matriz)
+
+#Exemplo de como transformar uma coluna específica de um DataFrame em uma matriz NumPy
+print(df.loc[:, 'Idade'].to_numpy())
+print(df.loc[:, 'Nome'].to_numpy())
+#ou
+print(df['Idade'].to_numpy())
+print(df['Nome'].to_numpy())
+
+#Exportando dados
+to_csv()# exporta o DataFrame para um arquivo CSV.
+to_excel()# exporta o DataFrame para um arquivo Excel.
+to_json()# exporta o DataFrame para um arquivo JSON.
+to_sql()# exporta o DataFrame para uma tabela em um banco de dados SQL.
+
+import pandas as pd
+dados = [('Ana', 21), ('Bruno', 20), ('Carla', 22)]
+df = pd.DataFrame(data = dados, columns=['Nome', 'Idade'])
+print(df)
+df.to_csv('dados.csv', index=False) # Exporta o DataFrame para um arquivo CSV sem o índice
+
+#Importando dados
+read_csv()# importa dados de um arquivo CSV para um DataFrame.
+read_excel()# importa dados de um arquivo Excel para um DataFrame.
+read_json()# importa dados de um arquivo JSON para um DataFrame.
+read_sql()# importa dados de uma tabela em um banco de dados SQL para um DataFrame.
+
+#a partir de um site
+import pandas as pd
+import ucimlrepo
+from ucimlrepo import fetch_ucirepo
+student_performance = fetch_ucirepo(id=320)
+df = pd.concat([student_performance.data.features, student_performance.data.targets], axis=1)
+
+print(df.head()) # Mostra as primeiras linhas do DataFrame
+print(df.tail()) # Mostra as últimas 5 linhas do DataFrame
+print(df.info()) # Mostra informações sobre o DataFrame
+print(df.describe()) # Mostra estatísticas descritivas do DataFrame
+
+#selecionar uma das colunas do DataFrame e calcular a média e o desvio padrão dos valores
+import pandas as pd
+import matplotlib.pyplot as plt
+df.age.mean()
+df.age.std()
+
+# plotar um histograma da coluna selecionada.
+import matplotlib.pyplot as plt
+plt.figure(figsize=(4, 2)) # Altura e largura da figura
+plt.hist(df.age, bins=10)
+plt.title('Histograma da Idade dos Alunos')
+plt.xlabel('Idade')
+plt.ylabel('Frequência')
+plt.show()
+#boxplot
+import matplotlib.pyplot as plt
+plt.figure(figsize=(4, 2))
+plt.boxplot(df.age, vert=False)
+plt.title('Boxplot')
+plt.ylabel('Idade dos Alunos')
+plt.show()
+#gráfico de dispersão (scatter plot) entre duas colunas do DataFrame.
+plt.figure(figsize=(5, 4)) # Altura e largura da figura
+plt.scatter(df.age, df.studytime)
+plt.title('Gráfico de Dispersão: Idade vs Tempo de Estudo')
+plt.xlabel('Idade')
+plt.ylabel('Tempo de Estudo (horas por semana)')
+plt.show()
+#gráfico de barras (bar plot) para visualizar a contagem de uma coluna categórica do DataFrame.
+import matplotlib.pyplot as plt
+plt.figure(figsize=(5, 4)) # Altura e largura da figura
 
 
 
