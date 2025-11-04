@@ -218,14 +218,3 @@ idx = rng.integers(0, len(x_all), len(x_all))
 means[b] = np.mean(x_all[idx])
 ci_boot = (np.percentile(means, 2.5), np.percentile(means, 97.5))
 {"IC95% bootstrap (média)": (float(ci_boot[0]), float(ci_boot[1]))}
-
-
-
-
-
-
-
-
-
-
-
